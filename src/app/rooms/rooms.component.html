@@ -1,0 +1,67 @@
+<h2>Rooms</h2>
+
+<!-- Add/Edit Form -->
+<div *ngIf="showForm">
+  <h3>{{ editingRoom ? 'Edit Room' : 'Add Room' }}</h3>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+    <label>
+      Room ID:
+      <input type="text" [(ngModel)]="formData.room_id" name="roomId" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Room Name:
+      <input type="text" [(ngModel)]="formData.room_name" name="roomName" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Capacity:
+      <input type="number" [(ngModel)]="formData.capacity" name="capacity" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Building:
+      <input type="text" [(ngModel)]="formData.building" name="building" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Floor:
+      <input type="number" [(ngModel)]="formData.floor" name="floor" required class="form-control"/>
+    </label>
+    <br /><br>
+    <button type="submit" class="btn btn-primary">{{ editingRoom ? 'Update' : 'Add' }}</button>&nbsp;
+    <button type="button" (click)="cancel()" class="btn btn-secondary">Cancel</button>
+  </div>
+  </form><br>
+</div>
+
+<!-- Add Room Button -->
+<button (click)="addRoom()" class="btn btn-primary">Add Room</button><br><br>
+
+<!-- Table -->
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Room ID</th>
+      <th>Room Name</th>
+      <th>Capacity</th>
+      <th>Building</th>
+      <th>Floor</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let room of rooms">
+      <td>{{ room.room_id }}</td>
+      <td>{{ room.room_name }}</td>
+      <td>{{ room.capacity }}</td>
+      <td>{{ room.building }}</td>
+      <td>{{ room.floor }}</td>
+      <td>
+        <button (click)="editRoom(room)" class="btn btn-secondary">Update</button>&nbsp;
+        <button (click)="deleteRoom(room)" class="btn btn-danger">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

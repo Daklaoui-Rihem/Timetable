@@ -1,0 +1,60 @@
+<h2 >Classes</h2>
+
+<!-- Add/Edit Form -->
+<div *ngIf="showForm">
+  <h3>{{ editingClass ? 'Edit Class' : 'Add Class' }}</h3>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+    <label>
+        Class Id:
+        <input type="text" [(ngModel)]="formData.class_id" name="classId" required class="form-control" />
+      </label>
+      <br />
+    <label>
+      Class Name:
+      <input type="text" [(ngModel)]="formData.class_name" name="className" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Subject ID:
+      <input type="text" [(ngModel)]="formData.subject_id" name="subjectId" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Students:
+      <input type="text" [(ngModel)]="formData.students" name="students" required class="form-control"/>
+    </label>
+    <br /><br>
+    <button type="submit" class="btn btn-primary">{{ editingClass ? 'Update' : 'Add' }}</button>&nbsp;
+    <button type="button" (click)="cancel()" class="btn btn-secondary">Cancel</button>
+  </div>
+  </form><br>
+</div>
+
+<!-- Add Class Button -->
+<button (click)="addClass()" class="btn btn-primary">Add Class</button><br><br>
+
+<!-- Table -->
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Class Id</th>
+      <th>Class Name</th>
+      <th>Subject ID</th>
+      <th>Students</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let classObj of classes">
+      <td>{{ classObj.class_id }}</td>
+      <td>{{ classObj.class_name }}</td>
+      <td>{{ classObj.subject_id }}</td>
+      <td>{{ classObj.students }}</td>
+      <td>
+        <button (click)="editClass(classObj)" class="btn btn-secondary">Update</button>&nbsp;
+        <button (click)="deleteClass(classObj)" class="btn btn-danger">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

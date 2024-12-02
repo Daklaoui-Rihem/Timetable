@@ -1,0 +1,67 @@
+<h2>Subjects</h2>
+
+<!-- Add/Edit Form -->
+<div *ngIf="showForm">
+  <h3>{{ editingSubject ? 'Edit Subject' : 'Add Subject' }}</h3>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+    <label>
+      Subject ID:
+      <input type="text" [(ngModel)]="formData.subject_id" name="subjectId" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Subject Name:
+      <input type="text" [(ngModel)]="formData.subject_name" name="subjectName" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Subject Code:
+      <input type="text" [(ngModel)]="formData.subject_code" name="subjectCode" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Department:
+      <input type="text" [(ngModel)]="formData.department" name="department" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Description:
+      <textarea [(ngModel)]="formData.description" name="description" class="form-control"></textarea>
+    </label>
+    <br /><br>
+    <button type="submit" class="btn btn-primary">{{ editingSubject ? 'Update' : 'Add' }}</button>&nbsp;
+    <button type="button" (click)="cancel()" class="btn btn-secondary">Cancel</button>
+  </div>
+  </form><br>
+</div>
+
+<!-- Add Subject Button -->
+<button (click)="addSubject()" class="btn btn-primary">Add Subject</button><br><br>
+
+<!-- Table -->
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Subject ID</th>
+      <th>Subject Name</th>
+      <th>Subject Code</th>
+      <th>Department</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let subject of subjects">
+      <td>{{ subject.subject_id }}</td>
+      <td>{{ subject.subject_name }}</td>
+      <td>{{ subject.subject_code }}</td>
+      <td>{{ subject.department }}</td>
+      <td>{{ subject.description }}</td>
+      <td>
+        <button (click)="editSubject(subject)" class="btn btn-secondary">Edit</button>&nbsp;
+        <button (click)="deleteSubject(subject)" class="btn btn-danger">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

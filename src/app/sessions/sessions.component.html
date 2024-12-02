@@ -1,0 +1,88 @@
+<h2>Sessions</h2>
+
+<!-- Add/Edit Form -->
+<div *ngIf="showForm">
+  <h3>{{ editingSession ? 'Edit Session' : 'Add Session' }}</h3>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+    <label>
+      Session ID:
+      <input type="text" [(ngModel)]="formData.session_id" name="sessionId" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Subject ID:
+      <input type="text" [(ngModel)]="formData.subject_id" name="subjectId" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Teacher ID:
+      <input type="text" [(ngModel)]="formData.teacher_id" name="teacherId" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Room ID:
+      <input type="text" [(ngModel)]="formData.room_id" name="roomId" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Class ID:
+      <input type="text" [(ngModel)]="formData.class_id" name="classId" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Session Date:
+      <input type="date" [(ngModel)]="formData.session_date" name="sessionDate" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Start Time:
+      <input type="time" [(ngModel)]="formData.start_time" name="startTime" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      End Time:
+      <input type="time" [(ngModel)]="formData.end_time" name="endTime" required class="form-control"/>
+    </label>
+    <br /><br>
+    <button type="submit" class="btn btn-primary">{{ editingSession ? 'Update' : 'Add' }}</button>&nbsp;
+    <button type="button" (click)="cancel()"  class="btn btn-secondary">Cancel</button>
+  </div>
+  </form> 
+</div>
+
+<!-- Add Session Button -->
+<button (click)="addSession()" class="btn btn-primary">Add Session</button><br><br>
+
+<!-- Table -->
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Session ID</th>
+      <th>Subject ID</th>
+      <th>Teacher ID</th>
+      <th>Room ID</th>
+      <th>Class ID</th>
+      <th>Session Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let session of sessions">
+      <td>{{ session.session_id }}</td>
+      <td>{{ session.subject_id }}</td>
+      <td>{{ session.teacher_id }}</td>
+      <td>{{ session.room_id }}</td>
+      <td>{{ session.class_id }}</td>
+      <td>{{ session.session_date }}</td>
+      <td>{{ session.start_time }}</td>
+      <td>{{ session.end_time }}</td>
+      <td>
+        <button (click)="editSession(session)" class="btn btn-secondary">Edit</button>&nbsp;
+        <button (click)="deleteSession(session)" class="btn btn-danger">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

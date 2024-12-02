@@ -1,0 +1,74 @@
+<h2>Teachers</h2>
+
+<!-- Add/Edit Form -->
+<div *ngIf="showForm">
+  <h3>{{ editingTeacher ? 'Edit Teacher' : 'Add Teacher' }}</h3>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+    <label>
+      Teacher ID:
+      <input type="text" [(ngModel)]="formData.teacher_id" name="teacherId" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      First Name:
+      <input type="text" [(ngModel)]="formData.first_name" name="firstName" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Last Name:
+      <input type="text" [(ngModel)]="formData.last_name" name="lastName" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Email:
+      <input type="email" [(ngModel)]="formData.email" name="email" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Department:
+      <input type="text" [(ngModel)]="formData.department" name="department" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Phone:
+      <input type="text" [(ngModel)]="formData.phone" name="phone" required class="form-control"/>
+    </label>
+    <br /><br>
+    <button type="submit" class="btn btn-primary">{{ editingTeacher ? 'Update' : 'Add' }}</button>
+    <button type="button" (click)="cancel()" class="btn btn-secondary">Cancel</button>
+  </div>
+  </form><br>
+</div>
+
+<!-- Add Teacher Button -->
+<button (click)="addTeacher()" class="btn btn-primary">Add Teacher</button><br><br>
+
+<!-- Table -->
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Teacher ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th>Phone</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let teacher of teachers">
+      <td>{{ teacher.teacher_id }}</td>
+      <td>{{ teacher.first_name }}</td>
+      <td>{{ teacher.last_name }}</td>
+      <td>{{ teacher.email }}</td>
+      <td>{{ teacher.department }}</td>
+      <td>{{ teacher.phone }}</td>
+      <td>
+        <button (click)="editTeacher(teacher)" class="btn btn-secondary">Update</button>&nbsp;
+        <button (click)="deleteTeacher(teacher)" class="btn btn-danger">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,60 @@
+<h2>Students</h2>
+
+<!-- Add/Edit Form -->
+<div *ngIf="showForm">
+  <h3>{{ editingStudent ? 'Edit Student' : 'Add Student' }}</h3>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+    <label>
+      Student ID:
+      <input type="text" [(ngModel)]="formData.student_id" name="studentId" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      First Name:
+      <input type="text" [(ngModel)]="formData.first_name" name="firstName" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Last Name:
+      <input type="text" [(ngModel)]="formData.last_name" name="lastName" required class="form-control"/>
+    </label>
+    <br />
+    <label>
+      Email:
+      <input type="email" [(ngModel)]="formData.email" name="email" required class="form-control"/>
+    </label>
+    <br /><br>
+    <button type="submit" class="btn btn-primary">{{ editingStudent ? 'Update' : 'Add' }}</button>&nbsp;
+    <button type="button" (click)="cancel()" class="btn btn-secondary">Cancel</button>
+  </div>
+  </form><br>
+</div>
+
+<!-- Add Student Button -->
+<button (click)="addStudent()" class="btn btn-primary">Add Student</button><br><br>
+
+<!-- Table -->
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Student ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let student of students">
+      <td>{{ student.student_id }}</td>
+      <td>{{ student.first_name }}</td>
+      <td>{{ student.last_name }}</td>
+      <td>{{ student.email }}</td>
+      <td>
+        <button (click)="editStudent(student)" class="btn btn-secondary">Edit</button>&nbsp;
+        <button (click)="deleteStudent(student)" class="btn btn-danger">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
